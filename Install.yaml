@@ -1,0 +1,18 @@
+---
+- name: Install Apache2 on Slave0 and Nginx on Slave1
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install Apache2 on Slave0
+      when: inventory_hostname == 'Slave0'
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install Nginx on Slave1
+      when: inventory_hostname == 'Slave1'
+      apt:
+        name: nginx
+        state: present
